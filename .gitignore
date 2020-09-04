@@ -348,3 +348,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+
+# WordPress Docker Environment
+wp-env/*
+!wp-env/docker-compose.yml

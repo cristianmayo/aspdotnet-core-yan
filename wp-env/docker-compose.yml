@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+    # Database
+    mysqldb:
+        image: mysql:5.7
+        volumes:
+            - mysqldb_data:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: wp_yanthusiast_db
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: wordpress
+        networks:
+            - yanthusiast
+    # phpmyadmin
+    phpmyadmin:
+        depends_on: 
+            - mysqldb 
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        ports: 
+            - '8080:80'
+        environment: 
+            PMA_HOSTS: mysqldb 
+            MYSQL_ROOT_PASSWORD: password
+        networks:
+            - yanthusiast
+    # WordPress
+    wordpress:
+        depends_on:
+            - mysqldb
+        image: wordpress:latest
+        ports:
+            - '8000:80'
+        restart: always
+        volumes: ['./:/var/www/html']
+        environment:
+            WORDPRESS_DB_HOST: mysqldb:3306
+            WORDPRESS_DB_USER: wordpress
+            WORDPRESS_DB_PASSWORD: wordpress
+        networks:
+            - yanthusiast
+networks:
+    yanthusiast:
+volumes:
+    mysqldb_data:

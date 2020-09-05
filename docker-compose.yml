@@ -8,12 +8,12 @@ services:
             - mysqldb_data:/var/lib/mysql
         restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: password
-            MYSQL_DATABASE: wp_yanthusiast_db
-            MYSQL_USER: wordpress
-            MYSQL_PASSWORD: wordpress
+            MYSQL_ROOT_PASSWORD: P@ssw0rd
+            MYSQL_DATABASE: wpdatabase
+            MYSQL_USER: wpadmin
+            MYSQL_PASSWORD: P@ssw0rd
         networks:
-            - yanthusiast
+            - wpnetwork
     # phpmyadmin
     phpmyadmin:
         depends_on: 
@@ -24,9 +24,9 @@ services:
             - '8080:80'
         environment: 
             PMA_HOSTS: mysqldb 
-            MYSQL_ROOT_PASSWORD: password
+            MYSQL_ROOT_PASSWORD: P@ssw0rd
         networks:
-            - yanthusiast
+            - wpnetwork
     # WordPress
     wordpress:
         depends_on:
@@ -35,14 +35,15 @@ services:
         ports:
             - '8000:80'
         restart: always
-        volumes: ['./:/var/www/html']
+        volumes: ['./wp-env:/var/www/html']
         environment:
             WORDPRESS_DB_HOST: mysqldb:3306
-            WORDPRESS_DB_USER: wordpress
-            WORDPRESS_DB_PASSWORD: wordpress
+            WORDPRESS_DB_NAME: wpdatabase
+            WORDPRESS_DB_USER: wpadmin
+            WORDPRESS_DB_PASSWORD: P@ssw0rd
         networks:
-            - yanthusiast
+            - wpnetwork
 networks:
-    yanthusiast:
+    wpnetwork:
 volumes:
     mysqldb_data:

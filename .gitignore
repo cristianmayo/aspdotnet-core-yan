@@ -352,4 +352,3 @@ MigrationBackup/
 
 # WordPress Docker Environment
 wp-env/*
-!wp-env/docker-compose.yml

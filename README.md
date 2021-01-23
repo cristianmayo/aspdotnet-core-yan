@@ -13,7 +13,8 @@ Prerequisites:
 To configure the environment, follow instruction in [Traversy Media: Quick Wordpress Setup With Docker](https://youtu.be/pYhLEV-sRpY) for starter to configure docker-compose file, or feel-free to configure as per desired for experienced developer.
 
 - In terminal, ensure that your active directory is set to root folder: `*\wordpress-dev-env`
-- Execute: `docker-compose up --detach`
+- Intialize development environment: `docker-compose up --detach`
+- Clean-up development environment: `docker-compose down --volumes`
 
 <div style="margin-bottom: 50px;"></div>
 
@@ -37,4 +38,18 @@ Upon completion of WordPress environment via Docker images, follow either of the
 
 ## **Start WordPress Theme Development**
 ****
-- Not-Started
+Souce-souce Location:
+
+    wordpress-dev-env\environment\wp-content\themes\src
+
+1.
+
+
+
+## **Start WordPress Plugin Development**
+****
+Souce-souce Location:
+
+    wordpress-dev-env\environment\wp-content\plugins\src
+
+1.

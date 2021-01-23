@@ -3,6 +3,7 @@ version: '3'
 services:
     # Database
     mysqldb:
+        container_name: mysql-database
         image: mysql:5.7
         volumes:
             - mysqldb_data:/var/lib/mysql
@@ -16,26 +17,28 @@ services:
             - wpnetwork
     # phpmyadmin
     phpmyadmin:
-        depends_on: 
-            - mysqldb 
+        container_name: phpmyadmin-portal
+        depends_on:
+            - mysqldb
         image: phpmyadmin/phpmyadmin
         restart: always
-        ports: 
+        ports:
             - '8080:80'
-        environment: 
-            PMA_HOSTS: mysqldb 
+        environment:
+            PMA_HOSTS: mysqldb
             MYSQL_ROOT_PASSWORD: P@ssw0rd
         networks:
             - wpnetwork
     # WordPress
     wordpress:
+        container_name: wordpress-server
         depends_on:
             - mysqldb
         image: wordpress:latest
         ports:
             - '8000:80'
         restart: always
-        volumes: ['./wp-env:/var/www/html']
+        volumes: ['./environment:/var/www/html']
         environment:
             WORDPRESS_DB_HOST: mysqldb:3306
             WORDPRESS_DB_NAME: wpdatabase

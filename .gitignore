@@ -351,5 +351,16 @@ MigrationBackup/
 
 
 # WordPress Docker Environment
-wp-env/*
-!wp-env/docker-compose.yml
+environment/*
+!environment/wp-content/
+
+environment/wp-content/*
+
+!environment/wp-content/themes
+environment/wp-content/themes/[Tt]wenty*
+environment/wp-content/themes/index.php
+
+!environment/wp-content/plugins
+environment/wp-content/plugins/[Aa]kismet
+environment/wp-content/plugins/hello.php
+environment/wp-content/plugins/index.php
